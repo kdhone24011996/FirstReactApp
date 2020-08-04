@@ -1,4 +1,4 @@
-/* .person{
+.person{
 	width: 60%;
 	margin: 12px auto;
 	border :2px solid;
@@ -12,16 +12,10 @@
 }
 
 
-.input{
+.Input{
 	width: 30%;
 	border :1px solid;
 	box-shadow: 0 2px, 3px #ccc;
 }
 
-.red{
-	color: red;
-}
 
-.bold{
-	font-weight: bold;
-} */

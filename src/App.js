@@ -1,26 +1,10 @@
 import React,{useState} from 'react';
-import './App.css';
-//import './Person/person.css'
+import   './App.css';
 import Person from './Person/Person';
 import { render } from '@testing-library/react';
 import styled from 'styled-components';
 
 const App = props =>{
-
-  const StyledButton= styled.button`
-  background-color: ${(props) => props.alt?'red':'green'};
-    border : 2px gray;
-    width: 10%;
-    color: white;
-    height : 30px;
-    margin : 20px auto;
-
-    &:hover{
-      background-color : ${(props) => props.alt?'salmon':'lightgreen'};
-      color : black;
-    }
-  
-  `;
 
 
 const [personState, setPersonState] = useState({
@@ -81,26 +65,32 @@ const [personState, setPersonState] = useState({
   render()
 {
   
-  let classes = []
+  let assingClasses = []
 
   if (personState.persons.length<3){
-    classes.push('red')
+    assingClasses.push('red')
   }
 
   
   if (personState.persons.length<2){
-    classes.push('bold')
+    assingClasses.push('bold')
   }
 
 
-  let person = null
+ let btnclass='button'
+
+if(personState.showPerson){
+  btnclass = 'Red'
+}
+
+  
 
   return (
-      <div className="App">
+      <div className= 'App'>
         
         <h1> Hello </h1>
-        <p className = {classes.join(' ')}>this is working</p>
-        <StyledButton alt ={personState.showPerson} onClick = {togglePerson}> togglePerson</StyledButton>
+        <p className = {assingClasses.join(' ')}>this is working</p>
+        <button className={btnclass} alt ={personState.showPerson} onClick = {togglePerson}> togglePerson</button>
 
        
 
@@ -114,11 +104,14 @@ const [personState, setPersonState] = useState({
                           click = {deletePerson.bind(this,index)} 
                     
                           key = {person.id}/>
-        } )}
-    
-    
-    
+        } 
+         
+        )
+        }
+     
       </div> : null 
+
+      
       
 }
 
