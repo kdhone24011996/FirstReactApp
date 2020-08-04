@@ -1,8 +1,10 @@
 import React,{useState} from 'react';
 import   './App.css';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 import { render } from '@testing-library/react';
 import styled from 'styled-components';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit'
 
 const App = props =>{
 
@@ -48,77 +50,35 @@ const [personState, setPersonState] = useState({
   
  const togglePerson = () =>{
     let toggle = personState.showPerson
+    let persons = [...personState.persons]
     setPersonState({
-      persons : [
-        { id :1, name : 'kushal' , age : 28},
-        { id :2, name : 'nikit' , age : 24},
-        { id :3, name : 'nalandeep' , age : 25},
-        { id :4, name : 'sumit' , age : 29}
-       ],
-     
+       persons : persons,
        showPerson: !toggle
      })
     
   }
 
 
-  render()
-{
-  
-  let assingClasses = []
-
-  if (personState.persons.length<3){
-    assingClasses.push('red')
-  }
-
-  
-  if (personState.persons.length<2){
-    assingClasses.push('bold')
-  }
-
-
- let btnclass='button'
-
-if(personState.showPerson){
-  btnclass = 'Red'
-}
-
-  
-
   return (
       <div className= 'App'>
-        
-        <h1> Hello </h1>
-        <p className = {assingClasses.join(' ')}>this is working</p>
-        <button className={btnclass} alt ={personState.showPerson} onClick = {togglePerson}> togglePerson</button>
 
-       
+<Cockpit persons = {personState.persons}
+         showPerson = {personState.showPerson}
+         togglePerson = {togglePerson}
+/>
 
 {personState.showPerson ?
        <div>
-         
-        {personState.persons.map((person ,index) =>{
-          return <Person name = {person.name }
-                          age = {person.age}
-                          change = {(event) => nameChangeHandler(event, person.id)}
-                          click = {deletePerson.bind(this,index)} 
-                    
-                          key = {person.id}/>
-        } 
-         
-        )
-        }
-     
-      </div> : null 
-
-      
-      
+         <Persons persons = {personState.persons} 
+                  changed = {nameChangeHandler}
+                  clicked = {deletePerson}
+         />
+      </div> : null         
 }
-
 
       </div>
     );
 
 };
-}
+
 export default App;
